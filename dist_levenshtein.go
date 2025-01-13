@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 )
 
 var a string = "kitten"
@@ -68,6 +69,24 @@ func correction(mot string, dict []string) []string {
 		}
 	}
 	return res
+}
+func corrections(a_corriger, dict []string) map[string][]string {
+
+	results := make(map[string][]string)
+	var mutex sync.Mutex
+	var wg sync.WaitGroup
+	for _, mot := range a_corriger {
+		wg.Add(1)
+		go func(mot string) {
+			defer wg.Done()
+			corrected := correction(mot, dict)
+			mutex.Lock()
+			results[mot] = corrected
+			mutex.Unlock()
+		}(mot)
+	}
+	wg.Wait()
+	return results
 }
 
 func main() {
