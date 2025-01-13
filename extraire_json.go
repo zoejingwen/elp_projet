@@ -1,5 +1,3 @@
-package main
-
 import (
 	"bufio"
 	"encoding/json"
@@ -8,7 +6,7 @@ import (
 	"os"
 )
 
-func main() {
+func extraire() {
 	// Ouvrir le fichier JSON
 	file, err := os.Open("dict_anglais.json")
 	if err != nil {
@@ -42,6 +40,4 @@ func main() {
 		log.Fatalf("Erreur lors de la lecture du fichier : %v", err)
 	}
 
-	// test affiche un mot
-	fmt.Println("mot:", words[0])
 }

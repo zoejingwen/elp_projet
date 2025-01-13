@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 var a string = "kitten"
 
@@ -56,9 +58,23 @@ func pourcentage(a string, b string, dist int) float64 {
 	return res
 }
 
+func correction(mot string, dict []string) []string {
+	res := []string{}
+	for i := 0; i < len(dict); i++ {
+		distance := dist_lev(mot, dict[i])
+		difference := pourcentage(mot, dict[i], distance)
+		if difference <= 25 {
+			res = append(res, dict[i])
+		}
+	}
+	return res
+}
+
 func main() {
-	a := "ogiyowiiiigg <,?[!12]"
-	b := "ogiyowiiiggs <,?[!12]"
+	a := "abcd"
+	b := "abcde"
+
 	fmt.Println(dist_lev(a, b))
 	fmt.Printf("la différence entre les deux chaînes est %v %%\n", pourcentage(a, b, dist_lev(a, b)))
+
 }
