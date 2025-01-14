@@ -9,7 +9,7 @@ import (
 
 func Extraire() []string {
 	// Ouvrir le fichier JSON
-	file, err := os.Open("dict_anglais.json")
+	file, err := os.Open("Base_de_donnees/dict_anglais.json")
 	if err != nil {
 		log.Fatalf("Erreur lors de l'ouverture du fichier : %v", err)
 	}

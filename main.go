@@ -1,12 +1,12 @@
 package main
 
 import (
-	"ELP_PROJET/utils"
+	"elp_projet/utils"
 	"fmt"
 )
 
 func main() {
-	a := "apple banana grape cherry"
+	a := []string{"apple", " banana", "grap", " cherry"}
 	dict := utils.Extraire()
 	fmt.Println(utils.Corrections(a, dict))
 
