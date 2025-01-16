@@ -3,5 +3,6 @@
 ## Création d'un modèle client-serveur TCP
 ### liste TAF :
 * serveur TCP
-* texte a corriger à entrer par le client 
-* adapter la quantité de go routines (paramètre modifiable par le serveur)
+* texte a corriger à entrer par le client DONE V
+* enlever les go routines de la phrase (car met les mots dans le désordre)
+* ajouter go routine dans le dico et adapter la quantité de go routines (paramètre modifiable en fct des capacités du serveur)
