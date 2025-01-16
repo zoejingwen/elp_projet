@@ -6,8 +6,9 @@ import (
 )
 
 func main() {
+	a_corriger := utils.Recup_txt_a_corriger()
+	fmt.Println(a_corriger)
 	dict := utils.ExtraireListe("Base_de_donnees/dict_anglais.json")
-	a_corriger := utils.ExtraireListe("Base_de_donnees/a_corriger.json")
 	fmt.Println(utils.Corrections(a_corriger, dict))
 
 }
