@@ -6,9 +6,8 @@ import (
 )
 
 func main() {
-	a := []string{"apple", " banana", "grap", " cherry"}
-	dict := utils.Extraire()
-	fmt.Println(utils.Corrections(a, dict))
-	utils.New_dic()
+	dict := utils.ExtraireListe("Base_de_donnees/dict_anglais.json")
+	a_corriger := utils.ExtraireListe("Base_de_donnees/a_corriger.json")
+	fmt.Println(utils.Corrections(a_corriger, dict))
 
 }
