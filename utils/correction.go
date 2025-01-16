@@ -12,6 +12,10 @@ func Correction(mot string, dict []string) []string {
 		if difference <= 25 {
 			res = append(res, dict[i])
 		}
+		if difference == 0 { // si on trouve un mot identique on arrete la recherche
+			res = []string{dict[i]}
+			break
+		}
 	}
 	return res
 }
