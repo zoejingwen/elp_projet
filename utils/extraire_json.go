@@ -42,3 +42,27 @@ func Extraire() []string {
 	}
 	return words
 }
+
+func EcrireListeDansFichierJSON(liste []string, cheminFichier string) {
+	// Créer ou ouvrir le fichier
+	file, err := os.Create(cheminFichier)
+	if err != nil {
+		log.Fatalf("Erreur lors de la création du fichier : %v", err)
+	}
+	defer file.Close()
+
+	// Encoder la liste en JSON
+	encoder := json.NewEncoder(file)
+	err = encoder.Encode(liste)
+	if err != nil {
+		log.Fatalf("Erreur lors de l'encodage en JSON : %v", err)
+	}
+}
+
+func New_dic() {
+	// Extraire les mots du fichier JSON
+	words := Extraire()
+
+	// Ecrire les mots dans un fichier JSON
+	EcrireListeDansFichierJSON(words, "Base_de_donnees/dict_anglais.json")
+}
