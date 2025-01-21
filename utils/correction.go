@@ -1,9 +1,5 @@
 package utils
 
-import (
-	"sync"
-)
-
 func Correction(mot string, dict []string) []string {
 	res := []string{}
 	for i := 0; i < len(dict); i++ {
@@ -22,18 +18,9 @@ func Correction(mot string, dict []string) []string {
 func Corrections(a_corriger, dict []string) map[string][]string {
 
 	results := make(map[string][]string)
-	var mutex sync.Mutex
-	var wg sync.WaitGroup
 	for _, mot := range a_corriger {
-		wg.Add(1)
-		go func(mot string) {
-			defer wg.Done()
-			corrected := Correction(mot, dict)
-			mutex.Lock()
-			results[mot] = corrected
-			mutex.Unlock()
-		}(mot)
+		corrected := Correction(mot, dict)
+		results[mot] = corrected
 	}
-	wg.Wait()
 	return results
 }
