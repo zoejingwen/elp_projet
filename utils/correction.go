@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"runtime"
 	"sync"
 )
 
@@ -9,14 +10,18 @@ func Correction(mot string, dict []string) []string {
 
 	var mutex sync.Mutex
 	var wait_group sync.WaitGroup
+	poolSize := runtime.NumCPU()
+	pool := make(chan struct{}, poolSize)
 	stop := make(chan struct{})
 	for i := 0; i < len(dict); i++ {
 		mot_dico := dict[i]
 		wait_group.Add(1)
+		pool <- struct{}{} //bloque si autant de go routine que de coeurs
 		go func(mot_dico string) {
 			defer wait_group.Done()
 			select {
 			case <-stop:
+				<-pool
 				return //arrete la go routine si un mot identique a été trouvé
 			default:
 				distance := Dist_lev(mot, mot_dico)
@@ -33,6 +38,7 @@ func Correction(mot string, dict []string) []string {
 					mutex.Unlock()
 				}
 			}
+			<-pool
 		}(mot_dico)
 	}
 	wait_group.Wait()
