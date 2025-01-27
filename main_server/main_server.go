@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	tcp.Main_server()
+	tcp.Main()
 }
