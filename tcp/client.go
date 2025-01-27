@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-func client() {
+func Client() {
 	conn, err := net.Dial("tcp", "localhost:3000")
 	if err != nil {
 		fmt.Println("Failed to connect to server:", err)

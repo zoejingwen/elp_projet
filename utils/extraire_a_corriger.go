@@ -1,14 +1,12 @@
 package utils
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"strings"
 	"unicode"
 )
 
-func txt_to_liste(txt_a_corriger string) []string {
+func Txt_to_liste(txt_a_corriger string) []string {
 	txt_a_corriger = strings.ToLower(txt_a_corriger)
 	fmt.Print(txt_a_corriger)
 
@@ -30,12 +28,4 @@ func txt_to_liste(txt_a_corriger string) []string {
 	fmt.Print(txt_a_corriger)
 
 	return liste
-}
-
-func Recup_txt_a_corriger() []string {
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Println("Entrez le texte à corriger : ")
-	txt_a_corriger, _ := reader.ReadString('\n')
-	fmt.Print(txt_a_corriger)
-	return txt_to_liste(txt_a_corriger)
 }
