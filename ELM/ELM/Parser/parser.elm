@@ -1,7 +1,53 @@
 module TcTurtleParser exposing (..)
 import Parser exposing (..)
-type program=Right Int
-            |Forward Int
-            |Left Int
-            |Repeat Int
+type Command
+    = Forward Int
+    | Left Int
+    | Right Int
+    | Repeat Int (List Command)
             
+parseRight : Parser Command
+parseRight =succeed Right
+            |. token "Right"
+            |. spaces
+            |= int 
+parseForward : Parser Command
+parseForward =succeed Forward
+            |. token "Forward"
+            |. spaces
+            |= int 		
+parseRight : Parser Command
+parseLeft =succeed Left
+            |. token "Left"
+            |. spaces
+            |= int 
+parseRepeat : Parser Command
+parseRepeat =succeed Repeat
+            |. token "Repeat"
+            |. spaces
+            |= int
+            |. spaces
+            |= lazy (\_ -> parseCommandList)
+
+
+parseCommandList : Parser (List Command)
+parseCommandList =succeed identify
+                |. token "["
+                |= parseCommands
+                |. token "]"
+
+parseCommands : Parser (List Command)
+parseCommands =succeed (\cmd rest -> cmd :: rest)
+            |= lazy (\_ -> parseCommand)
+            |= lazy (\_ -> parseCommands)
+            <|> succeed []
+
+parseCommand : Parser Command
+parseCommand =lazy (\_ ->oneOf
+            [ parseRight
+            , parseForward
+            , parseLeft
+            , parseRepeat
+            ]
+    )
+
