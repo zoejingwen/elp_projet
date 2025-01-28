@@ -3,8 +3,8 @@ module Main exposing (..)
 import Browser
 import Html exposing (Html, Attribute, button, div, input, text)
 import Html.Attributes exposing (..)
-import Html.events exposing (onClick, onInput)
-import ../Parser/TcTurtleParser exposing (..)
+import Html.Events exposing (onClick, onInput)
+import Parser.TcTurtleParser exposing (..)
 
 -- MAIN
 
@@ -38,7 +38,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ text "Type in your TcTurtle code below :"
-        , input [ placeholder "exemple : [Repeat 360 [ Right 1, Forward 1]]", value model.commandes ]
+        [ div [] [text "Type in your TcTurtle code below :"]
+        , input [ placeholder "exemple : [Repeat 360 [ Right 1, Forward 1]]", value model.commandes ] []
         , button [ onClick Start] [ text "Draw"]
         ] -- ajouter le display svg
