@@ -4,7 +4,7 @@ import Browser
 import Html exposing (Html, Attribute, button, div, input, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onInput)
-import Parser.TcTurtleParser exposing (..)
+-- import Parser.TcTurtleParser exposing (..)
 
 -- MAIN
 
