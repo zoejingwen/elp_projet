@@ -45,12 +45,24 @@ func Correction(mot string, dict []string) []string {
 	return res
 }
 
-func Corrections(a_corriger, dict []string) map[string][]string {
+func Order(a_corriger []string, results map[string][]string) []string {
+	orderedResults := make([]string, 0, len(a_corriger))
+	for _, mot := range a_corriger {
+		if corrected, exists := results[mot]; exists && len(corrected) > 0 {
+			orderedResults = append(orderedResults, corrected[0])
+		} else {
+			orderedResults = append(orderedResults, mot)
+		}
+	}
+	return orderedResults
+}
+
+func Corrections(a_corriger, dict []string) []string {
 
 	results := make(map[string][]string)
 	for _, mot := range a_corriger {
 		corrected := Correction(mot, dict)
 		results[mot] = corrected
 	}
-	return results
+	return Order(a_corriger, results)
 }

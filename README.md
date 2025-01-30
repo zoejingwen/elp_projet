@@ -7,4 +7,5 @@
 * enlever les go routines de la phrase (car met les mots dans le désordre) DONE V
 * ajouter go routine dans le dico DONE V
 * adapter la quantité de go routines avec pool (paramètre modifiable en fct des capacités du serveur) DONE V
-* changer le type de sortie de la fonction Corrections (car map met les clés dans un ordre aléatoire) (par exemple remplacer par un liste de tuple : string et liste de string)
+* changer le type de sortie de la fonction Corrections (car map met les clés dans un ordre aléatoire) --> liste de string DONE V
+* tester
