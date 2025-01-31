@@ -1,7 +1,7 @@
 package main
 
 import (
-	"elp_projet/tcp"
+	"Golang/tcp"
 )
 
 func main() {

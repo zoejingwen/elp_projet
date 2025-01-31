@@ -1,3 +1,3 @@
-module elp_projet
+module Golang
 
 go 1.23.4

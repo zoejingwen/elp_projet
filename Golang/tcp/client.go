@@ -29,14 +29,14 @@ func Client() {
 			fmt.Println("Server closed connection:", err)
 			return
 		}
-		var data map[string]interface{}
+		var data []string
 		err = json.Unmarshal(buffer[:n], &data)
 		if err != nil {
 			fmt.Println("Failed to unmarshal JSON:", err)
 			return
 		}
-		for key, value := range data {
-			fmt.Printf("%s:%v\n", key, value)
+		for _, value := range data {
+			fmt.Println(value)
 		}
 	}
 }

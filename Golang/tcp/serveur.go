@@ -1,8 +1,9 @@
 package tcp
 
 import (
-	"elp_projet/utils"
+	"Golang/utils"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net"
 	"time"
@@ -64,6 +65,7 @@ func HandleConnection(conn net.Conn) {
 		dict := utils.ExtraireListe("Base_de_donnees/dict_anglais.json")
 		message := utils.Txt_to_liste(msg)
 		reponse := utils.Corrections(message, dict)
+		fmt.Println(reponse)
 		jsonData, err := json.Marshal(reponse)
 		if err != nil {
 			log.Printf("Failed to marshal JSON: %v\n", err)
