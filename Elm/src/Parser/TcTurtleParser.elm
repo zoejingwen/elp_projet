@@ -1,5 +1,5 @@
-module TcTurtleParser exposing (..)
-import Parser exposing (..)
+module Parser.TcTurtleParser exposing (..)
+import Dessin.Display exposing (..)
 type Command
     = Forward Int
     | Left Int
@@ -15,8 +15,8 @@ parseForward : Parser Command
 parseForward =succeed Forward
             |. token "Forward"
             |. spaces
-            |= int 		
-parseRight : Parser Command
+            |= int
+parseLeft : Parser Command
 parseLeft =succeed Left
             |. token "Left"
             |. spaces
