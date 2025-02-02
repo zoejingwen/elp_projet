@@ -3,12 +3,7 @@ module Dessin.Dessin exposing (..)
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
 import Html exposing (..)
-
-type Command
-    = Forward Int
-    | Left Int
-    | Right Int
-    | Repeat Int (List Command)
+import Parser.TcTurtleParser exposing(..)
 
 type alias State =
     { x : Float

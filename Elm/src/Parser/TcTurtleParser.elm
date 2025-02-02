@@ -1,7 +1,6 @@
 module Parser.TcTurtleParser exposing (..)
 
 import Parser exposing (..)
-import Dessin.Display exposing (..)
 
 type Command
     = Forward Int
