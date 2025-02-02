@@ -1,6 +1,7 @@
 module Dessin.Display exposing (..)
 
-import Dessin.Dessin exposing (..)
+import Dessin.Dessin exposing (interpretCommand)
+import Parser.TcTurtleParser exposing(Command)
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
 
