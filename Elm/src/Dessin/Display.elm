@@ -1,15 +1,16 @@
 module Dessin.Display exposing (..)
+
 import Dessin.Dessin exposing (..)
 import Svg exposing (..)
-import Html exposing(Html)
+import Svg.Attributes exposing (..)
 
-display : List Command -> List (Html msg)
+display : List Command -> Svg msg
 display commands =
     let
         initialState =
-            { x = 0, y = 0, angle = 0 }
+            { x = 250, y = 250, angle = 0 } -- Position initiale au centre de l'écran
 
-        (finalState, svgLines) =
+        (_, svgLines) =
             List.foldl
                 (\cmd (s, acc) ->
                     let
@@ -21,4 +22,9 @@ display commands =
                 (initialState, [])
                 commands
     in
-    (List.map (\line -> Html.node "g" [] [ Html.text line ]) svgLines)
+    svg
+        [ width "500"
+        , height "500"
+        , viewBox "0 0 500 500"
+        ]
+        (List.map (\line -> g [] [ text_ [] [ text line ] ]) svgLines)
