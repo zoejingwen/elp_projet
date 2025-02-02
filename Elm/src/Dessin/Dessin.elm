@@ -2,6 +2,7 @@ module Dessin.Dessin exposing (..)
 
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
+import Html exposing (..)
 
 type Command
     = Forward Int
@@ -80,24 +81,4 @@ interpretCommand command state =
                         (currentState, lines)
                         commands
             in
-            List.foldl repeatHelper (state, []) (List.repeat n ())
-
-display : List Command -> Svg msg
-display commands =
-    let
-        initialState =
-            { x = 0, y = 0, angle = 0 }
-
-        (finalState, svgLines) =
-            List.foldl
-                (\cmd (s, acc) ->
-                    let
-                        (newState, lines) =
-                            interpretCommand cmd s
-                    in
-                    (newState, acc ++ lines)
-                )
-                (initialState, [])
-                commands
-    in
-    (List.map (\line -> Html.node "g" [] [ Html.text line ]) svgLines)
+            List.foldl (\_ acc -> repeatHelper acc ()) (state, []) (List.repeat n ())
