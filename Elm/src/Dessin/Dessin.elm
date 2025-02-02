@@ -1,4 +1,4 @@
-module TcTurtleDisplay exposing (..)
+module Dessin.Dessin exposing (..)
 
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
