@@ -8,6 +8,7 @@ import Parser.TcTurtleParser exposing (parseCommandList)
 import Dessin.Display exposing (display)
 import Parser exposing (..)
 import Parser.TcTurtleParser exposing (Command)
+import Debug exposing (log)
 
 -- MAIN
 
@@ -49,3 +50,5 @@ view model =
         , button [ onClick Start] [ text "Draw"]
         , display (conversion model.commandes)
         ]
+affiche model =
+    log "Somme calculée" model.commandes
