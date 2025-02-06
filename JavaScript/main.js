@@ -14,7 +14,7 @@ async function getIndices(joueurs) {
         let count = 0;
         
         function askNext() {
-            if (count >= joueurs.length - 1) {
+            if (count >= joueurs.length) {
                 resolve(indices);
                 return;
             }
@@ -35,13 +35,13 @@ async function poserQuestion(question) {
     });
 }
 async function main() {
-    let joueurs = ["Alice", "Bob", "Charlie", "David"];
+    let joueurs = ["Alice", "Bob", "Charlie","Tom","Lisa"];
     let total_score = 0;
     let dernierJoueur = null;
     let card_box = [];
     
     for (let i = 0; i < 7; i++) {
-        let mot = await word();
+        let mot = word();
         card_box.push(mot);
     }
     
@@ -65,15 +65,15 @@ async function main() {
         let indices_final = await compareIndices(indices);
         console.log(`Indices valides : ${indices_final.join(", ")}`);
 
-        let resultat = await reponse(mot_secret);
+        let resultat =reponse(mot_secret);
         let resultatScore = score(total_score, resultat, card_box);
         total_score = resultatScore.score;
         card_box = resultatScore.card;
         console.log(`Résultat : ${resultat}, Score total : ${total_score}`);
         
-        let continuer = await poserQuestion("Voulez-vous continuer ? (Oui/Non) ");
-        if (!continuer) break;
+
     }
+    console.log("Attente de la réponse...")
     console.log("Fin du jeu ! Score final :", total_score);
     rl.close();
 }
