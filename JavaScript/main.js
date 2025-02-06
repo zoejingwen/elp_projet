@@ -1,9 +1,39 @@
 const choisirJoueur = require("./joueur_actif");
-const word = require("./word");
+const word = require("./select_secret_word");
 const score = require("./calcul_score");
 const compareIndices = require("./compareIndices");
 const reponse = require("./reponse");
-const getIndices=require("./get_indice");
+const readline = require("readline");
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+async function getIndices(joueurs) {
+    return new Promise((resolve) => {
+        let indices = [];
+        let count = 0;
+        
+        function askNext() {
+            if (count >= joueurs.length - 1) {
+                resolve(indices);
+                return;
+            }
+            rl.question(`${joueurs[count]} donne un indice : `, (indice) => {
+                indices.push(indice);
+                count++;
+                askNext();
+            });
+        }
+        askNext();
+    });
+}
+async function poserQuestion(question) {
+    return new Promise((resolve) => {
+        rl.question(question, (reponse) => {
+            resolve(reponse.trim().toLowerCase());
+        });
+    });
+}
 async function main() {
     let joueurs = ["Alice", "Bob", "Charlie", "David"];
     let total_score = 0;
@@ -11,8 +41,10 @@ async function main() {
     let card_box = [];
     
     for (let i = 0; i < 7; i++) {
-        card_box.push(await word());
+        let mot = await word();
+        card_box.push(mot);
     }
+    
     
     while (card_box.length > 0) {
         console.log("\nNouvelle manche !");
@@ -21,12 +53,8 @@ async function main() {
         console.log(`Le joueur qui doit deviner est : ${joueur}`);
 
         let mot_secret = card_box.shift();
-        
-        const bon = await new Promise((resolve) => {
-            rl.question(`Est-ce que vous pouvez bien comprendre ce mot mystère ? (${mot_secret}) (Oui/Non) `, (reponse) => {
-                resolve(reponse.toLowerCase());
-            });
-        });
+        console.log(mot_secret);
+        let bon = await poserQuestion(`Est-ce que vous pouvez bien comprendre ce mot mystère ? (${mot_secret}) (Oui/Non) `);
         
         if (bon === "non") {
             mot_secret = card_box.shift();
@@ -43,12 +71,7 @@ async function main() {
         card_box = resultatScore.card;
         console.log(`Résultat : ${resultat}, Score total : ${total_score}`);
         
-        let continuer = await new Promise((resolve) => {
-            rl.question("Voulez-vous continuer ? (Oui/Non) ", (reponse) => {
-                resolve(reponse.toLowerCase() === "oui");
-            });
-        });
-
+        let continuer = await poserQuestion("Voulez-vous continuer ? (Oui/Non) ");
         if (!continuer) break;
     }
     console.log("Fin du jeu ! Score final :", total_score);

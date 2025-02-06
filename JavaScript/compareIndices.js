@@ -1,4 +1,4 @@
-import readline from 'node:readline'
+const readline = require("readline");
 
 async function compareIndices(listeIndices) {
     return new Promise((resolve) => {
