@@ -1,6 +1,6 @@
 import readline from 'node:readline'
 
-function compareIndices(listeIndices) {
+async function compareIndices(listeIndices) {
     return new Promise((resolve) => {
         const listeIndicesfiltre = [];
         //console.log(!(listeIndicesfiltre.includes(listeIndices[2])))
@@ -31,7 +31,4 @@ function compareIndices(listeIndices) {
     });
 }
 
-(async () => {
-    const result = await compareIndices(["a", "a", "b"]);
-    console.log("Résultat final :", result);
-})();
+module.exports = compareIndices;

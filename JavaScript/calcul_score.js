@@ -11,3 +11,4 @@ function score(score, reponse, card) {
 
     return { score: score, card: card };  // Retourne un objet avec les deux valeurs
 }
+module.exports = score;

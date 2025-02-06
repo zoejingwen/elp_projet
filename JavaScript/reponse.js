@@ -17,5 +17,4 @@ function reponse(secret_word) {
     return comparaison;
 }
 
-// Exemple d'utilisation
-console.log(reponse("chat"));
+module.exports = reponse;
