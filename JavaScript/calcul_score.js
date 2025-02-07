@@ -1,7 +1,7 @@
 function score(score, reponse, card) {
     let newCard = [...card];  // Crée une copie pour éviter la mutation
 
-    if (reponse === "reussite") {
+    if (reponse === "réussite") {
         score += 1;
     } else if (reponse === "pass") {
         // On ne fait rien ici, on ignore la condition
