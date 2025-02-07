@@ -1,14 +1,17 @@
-function score(total_score, reponse, card) {
+function score(score, reponse, card) {
+    let newCard = [...card];  // Crée une copie pour éviter la mutation
+
     if (reponse === "reussite") {
-        total_score = score+1;
-    }
-    else if (reponse === "pass") {
+        score += 1;
+    } else if (reponse === "pass") {
         // On ne fait rien ici, on ignore la condition
-    }
-    else {
-        card.pop();  // On enlève le dernier élément de la carte
+    } else {
+        if (newCard.length > 0) {
+            newCard.pop();  // Retire un élément en évitant d'éventuels problèmes avec un tableau vide
+        }
     }
 
-    return { score: total_score, card: card };  // Retourne un objet avec les deux valeurs
+    return { score: score, card: newCard };  // Retourne un nouvel objet
 }
+
 module.exports = score;

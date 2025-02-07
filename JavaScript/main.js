@@ -69,7 +69,7 @@ async function main() {
         let resultatScore = score(total_score, resultat, card_box);
         total_score = resultatScore.score;
         card_box = resultatScore.card;
-        console.log(`Résultat : ${resultat}, Score total : ${total_score}`);
+        console.log(`Résultat : ${resultat}, Score total : ${total_score},amount of card:${card_box.length}`);
         
 
     }
