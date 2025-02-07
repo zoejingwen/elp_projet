@@ -3,10 +3,16 @@ const readline = require("readline");
 async function compareIndices(listeIndices) {
     return new Promise((resolve) => {
         const listeIndicesfiltre = [];
-        //console.log(!(listeIndicesfiltre.includes(listeIndices[2])))
         for (let i = 0; i < listeIndices.length; i++) {
             if (!(listeIndicesfiltre.includes(listeIndices[i]))) {
                 listeIndicesfiltre.push(listeIndices[i]);
+            }
+            else {
+                for (let j = 0; j < listeIndicesfiltre.length; j++){
+                    if (listeIndices[i] == listeIndicesfiltre[j]) {
+                        listeIndicesfiltre.splice(j,1)
+                    }
+                }
             }
         }
         const rl = readline.createInterface({
