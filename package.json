@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "random-word-slugs": "^0.1.7"
+    "random-word-slugs": "^0.1.7",
+    "readline-sync": "^1.4.10"
   }
 }
