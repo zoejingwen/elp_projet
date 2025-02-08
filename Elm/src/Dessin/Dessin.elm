@@ -15,7 +15,7 @@ degreesToRadians : Float -> Float
 degreesToRadians degrees =
     degrees * pi / 180
 
-applyForward : Int -> State -> (State, String)
+applyForward : Int -> State -> (State, Svg msg)
 applyForward distance state =
     let
         radianAngle =
@@ -26,17 +26,19 @@ applyForward distance state =
 
         newY =
             state.y - toFloat distance * sin radianAngle
-
-        svgLine =
-            String.join ""
-                [ "<line x1=\"", String.fromFloat state.x
-                , "\" y1=\"", String.fromFloat state.y
-                , "\" x2=\"", String.fromFloat newX
-                , "\" y2=\"", String.fromFloat newY
-                , "\" stroke=\"black\" stroke-width=\"2\" />"
-                ]
+        
     in
-    ( { state | x = newX, y = newY }, svgLine )
+    ( { state | x = newX, y = newY }
+    , line
+        [ x1 (String.fromFloat state.x)
+        , y1 (String.fromFloat state.y)
+        , x2 (String.fromFloat newX)
+        , y2 (String.fromFloat newY)
+        , stroke "black"
+        , strokeWidth "2"
+        ]
+        []
+    )
 
 applyLeft : Int -> State -> State
 applyLeft angle state =
@@ -46,15 +48,15 @@ applyRight : Int -> State -> State
 applyRight angle state =
     { state | angle = state.angle - toFloat angle }
 
-interpretCommand : Command -> State -> (State, List String)
+interpretCommand : Command -> State -> (State, List (Svg msg))
 interpretCommand command state =
     case command of
         Forward distance ->
             let
-                (newState, svgLine) =
+                (newState, lineSvg) =
                     applyForward distance state
             in
-            (newState, [ svgLine ])
+            (newState, [ lineSvg ])
 
         Left angle ->
             (applyLeft angle state, [])
