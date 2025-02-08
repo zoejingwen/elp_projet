@@ -30,6 +30,7 @@ init =
 
 type Msg
     = Start 
+    | UpdateInput String
 
 update : Msg -> Model -> Model
 update msg model =
@@ -39,6 +40,9 @@ update msg model =
                 parsed = conversion model.commandes
             in
             { model | parsedCommands = parsed} -- si bouton draw, ajoute parsed commands dans le model
+
+        UpdateInput newValue ->
+            {model | commandes = newValue}
 
 conversion : String -> List Command -- transforme string en list command grâce au parseur
 conversion inputt = 
@@ -51,8 +55,9 @@ conversion inputt =
 view : Model -> Html Msg
 view model =
     div []
-        [ input [ placeholder "exemple : [Repeat 360 [ Right 1, Forward 1]]", value model.commandes ] []
+        [ input [ placeholder "exemple : [Repeat 360 [ Right 1, Forward 1]]", value model.commandes, onInput UpdateInput ] []
         , button [ onClick Start] [ text "Draw"]
+        , text (Debug.toString model.parsedCommands)
         , display model.parsedCommands
         ]
 affiche model =
