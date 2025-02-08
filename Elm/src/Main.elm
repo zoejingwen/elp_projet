@@ -19,11 +19,12 @@ main =
 
 type alias Model =
     { commandes : String
+    , parsedCommands : List Command -- Liste des commandes une fois analysées
     }
 
 init : Model
 init =
-    Model ""
+    Model "" []
 
 -- UPDATE
 
@@ -33,9 +34,13 @@ type Msg
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        Start -> model -- display model.commandes -- adapter display
+        Start -> 
+            let
+                parsed = conversion model.commandes
+            in
+            { model | parsedCommands = parsed} -- si bouton draw, ajoute parsed commands dans le model
 
-conversion : String -> List Command
+conversion : String -> List Command -- transforme string en list command grâce au parseur
 conversion inputt = 
     case Parser.run parseCommandList inputt of
         Ok liste -> liste
@@ -48,7 +53,7 @@ view model =
     div []
         [ input [ placeholder "exemple : [Repeat 360 [ Right 1, Forward 1]]", value model.commandes ] []
         , button [ onClick Start] [ text "Draw"]
-        , display (conversion model.commandes)
+        , display model.parsedCommands
         ]
 affiche model =
     log "Somme calculée" model.commandes
