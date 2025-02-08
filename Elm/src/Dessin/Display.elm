@@ -27,5 +27,16 @@ display commands =
         [ width "500"
         , height "500"
         , viewBox "0 0 500 500"
+        , stroke "black" -- Ajoute un contour au SVG lui-même
+        , strokeWidth "2"
+        , fill "white"
         ]
-        (List.map (\line -> g [] [ text_ [] [ text line ] ]) svgLines)
+        (rect
+            [ x "0", y "0"
+            , width "500", height "500"
+            , stroke "black", strokeWidth "2"
+            , fill "none"
+            ]
+            []
+        :: svgLines
+        )
